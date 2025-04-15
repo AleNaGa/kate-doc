@@ -1,0 +1,16 @@
+- Creación de Repositorios: 
+	kate-controller-api
+	kate-visualizer-frontend
+	kate-docu
+	
+-Inicialización del proyecto en Spring
+	Dependencias: 
+		- Spring web
+		- Spring dev tools
+		- Lombok
+		- Spring Security
+	Versión: 
+		-Java 21
+		-Maven 3.3
+
+- 
