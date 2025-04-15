@@ -13,4 +13,36 @@
 		-Java 21
 		-Maven 3.3
 
-- 
+- Añadir la dependencia de Kubernetes client al proyecto
+
+- La estructura BACKEND tiene esta forma: 
+	[Kate-controller-api] --le pide a-> [Kubernetes Cluster] --devuelve-> [Transformación] ---> [MySQL]
+														
+												(Cada X tiempo )
+												
+	
+	EL FLUJO: 
+			[Kate Backend] -----> [Kubernetes API Server]
+						|
+						+--> [MySQL DB]
+
+ 
+ - crear una base de datos para ir registrando el estado de los pods periódicamente y desde la que se va a sacar la info para el frontend
+ 
+ - La base de datos se monta con: 
+			CREATE DATABASE kate_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; en MYSQL
+	y en el APP propperties: 
+			spring:
+			  datasource:                      				# Configuración de la base de datos
+				url: jdbc:mysql://localhost:3306/kate_db   	# Dirección de la BBDD MySQL (host:puerto/base_de_datos)
+				username: username                             	# Usuario de MySQL
+				password: contraseña                   	# Contraseña del usuario
+				driver-class-name: com.mysql.cj.jdbc.Driver  # Driver JDBC para MySQL
+
+			  jpa:                             			# Configuración de JPA (Hibernate)
+				hibernate:
+				  ddl-auto: update             			# Crea o actualiza automáticamente las tablas según las entidades
+				show-sql: true                 				# Muestra las consultas SQL por consola (útil para debug)
+				properties:
+				  hibernate.dialect: org.hibernate.dialect.MySQL8Dialect   # Dialecto para compatibilidad con MySQL 8
+
