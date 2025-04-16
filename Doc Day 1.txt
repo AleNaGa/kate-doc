@@ -46,3 +46,10 @@
 				properties:
 				  hibernate.dialect: org.hibernate.dialect.MySQL8Dialect   # Dialecto para compatibilidad con MySQL 8
 
+- Montar la capa de Modelo con las variables: pod_id, name, ... 
+
+-Montar la capa de Repositorio de JPA con PodRecord, Integer
+
+-Montar el DTO de PodRecord para mejorar la transferencia de datos
+
+-Montar la capa de servicios.  AQUI ME QUEDO

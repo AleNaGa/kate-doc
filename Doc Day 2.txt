@@ -1,0 +1,120 @@
+- CASOS DE USO: Diagrama
+	Esquema de Servicios: 
+			1. Servicio de Consulta de Estado de Pods
+					Función: 
+						Consultar el estado de un Pod específico en el clúster de Kubernetes.
+
+					EndPoints:
+
+						GET /pods/{namespace}/{podName}/status: Devuelve el estado del Pod (por ejemplo, "Running", "Failed", "Pending").
+
+					Tecnología usada:
+
+						Kubernetes Client (Fabric8).
+
+						API RESTful en Spring Boot.
+
+			2. Servicio de Gestión de Pods
+					Función: 
+						Permitir a los usuarios enviar comandos para gestionar Pods (iniciar, parar, restaurar).
+
+					EndPoints:
+
+						DELETE /pods/{namespace}/{podName}/stop: Detener el Pod.
+
+						POST /pods/{namespace}/{podName}/start: Iniciar el Pod.
+
+						POST /pods/{namespace}/{podName}/restore: Restaurar un Pod desde un estado fallido.
+
+					Tecnología usada:
+
+						Kubernetes Client (Fabric8) para ejecutar comandos sobre los Pods.
+
+						API RESTful en Spring Boot.
+
+			3. Servicio de Registro de Pods (Base de Datos)
+					Función: 
+						Guardar los registros de Pods en la base de datos MySQL (almacenar su estado, hora de inicio, etc.).
+
+					Modelo: 
+						PodRecord (almacena datos como name, status, namespace, startTime, endTime, etc.).
+
+					EndPoints:
+
+						POST /pods/record: Guardar un nuevo registro de Pod.
+
+						GET /pods/record: Obtener registros históricos de Pods.
+
+					Tecnología usada:
+
+						JPA (Spring Data) para interacción con MySQL.
+
+						Hibernate para persistencia de objetos.
+
+			4. Servicio de Autenticación (Usuarios) (MICROSERVICIO DIFERENTE EN PYTHON FASTAPI)
+					Función: 
+						Gestionar la autenticación de los usuarios usando JWT (JSON Web Tokens).
+
+					EndPoints:
+
+						POST /auth/login: Autenticación de usuarios y emisión de JWT.
+
+						POST /auth/register: Registro de nuevos usuarios.
+
+						GET /auth/validate: Validación de un JWT para proteger otros servicios.
+
+					Tecnología usada:
+
+						Spring Security.
+
+						JWT para manejo de autenticación y autorización.
+
+			5. Servicio de Visualización en Frontend
+					Función: 
+						Mostrar la red de Pods y su estado usando Three.js y Tailwind CSS en el frontend.
+
+					Tecnología usada:
+
+						Three.js para renderizar visualmente la red de Pods en un entorno 3D.
+
+						Tailwind CSS para estilizar la interfaz de usuario.
+
+			6. Servicio de Interacción con Pods (Frontend)
+					Función: 
+						Permitir a los usuarios interactuar con la red de Pods visualizada, enviando comandos como "Parar", "Iniciar" y "Restaurar".
+
+					Tecnología usada:
+
+						JavaScript (Fetch API) para interactuar con la API RESTful del backend.
+
+						Frontend interactivo con Three.js.
+
+			7. Servicio de Watch (Opcional)
+					Función: 
+							Observar los Pods en tiempo real para actualizar su estado en la interfaz sin necesidad de hacer consultas periódicas.
+
+					Tecnología usada:
+
+							WebSocket (para actualizaciones en tiempo real).
+
+							Kubernetes Client para observar los Pods.
+
+			8. Servicio de Monitoreo y Alertas (Opcional)
+					Función: 
+						Notificar a los usuarios cuando los Pods cambien de estado (por ejemplo, cuando un Pod falla o se reinicia).
+
+					Tecnología usada:
+
+							Spring Boot con integraciones de monitoreo.
+
+							WebSocket para notificaciones en tiempo real.
+
+			9. Servicio de Gestión de Clústeres (Opcional)
+					Función: 
+						Si se agregan múltiples clústeres Kubernetes, este servicio podría gestionar múltiples configuraciones de clúster y realizar operaciones cruzadas en los Pods.
+
+					Tecnología usada:
+
+						Kubernetes Client.
+
+						Spring Boot para crear un backend modular que se pueda conectar a diferentes clústeres.
