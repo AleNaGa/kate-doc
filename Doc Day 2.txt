@@ -1,5 +1,7 @@
 - CASOS DE USO: Diagrama
-	Esquema de Servicios: 
+
+
+-Esquema de Servicios: 
 			1. Servicio de Consulta de Estado de Pods
 					Función: 
 						Consultar el estado de un Pod específico en el clúster de Kubernetes.

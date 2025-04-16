@@ -1,0 +1,82 @@
+{
+  "nodes": [
+    {
+      "name": "node-1",
+      "status": "Ready",
+      "ip": "192.168.1.10",
+      "cpu": "4",
+      "memory": "16Gi",
+      "pods": [
+        {
+          "name": "nginx-pod-1",
+          "namespace": "default",
+          "status": "Running",
+          "startTime": "2025-04-15T14:00:00Z",
+          "containers": [
+            {
+              "name": "nginx-container",
+              "image": "nginx:latest",
+              "ready": true
+            }
+          ],
+          "deployment": "nginx-deployment",
+          "services": ["nginx-service"]
+        },
+        {
+          "name": "auth-pod",
+          "namespace": "auth",
+          "status": "CrashLoopBackOff",
+          "startTime": "2025-04-15T13:30:00Z",
+          "containers": [
+            {
+              "name": "auth-container",
+              "image": "my-auth:1.2",
+              "ready": false
+            }
+          ],
+          "deployment": "auth-deployment",
+          "services": []
+        }
+      ]
+    }
+  ],
+  "deployments": [
+    {
+      "name": "nginx-deployment",
+      "namespace": "default",
+      "replicas": 3,
+      "availableReplicas": 2
+    },
+    {
+      "name": "auth-deployment",
+      "namespace": "auth",
+      "replicas": 1,
+      "availableReplicas": 0
+    }
+  ],
+  "services": [
+    {
+      "name": "nginx-service",
+      "namespace": "default",
+      "type": "ClusterIP",
+      "clusterIP": "10.96.0.1",
+      "ports": [
+        {
+          "port": 80,
+          "targetPort": 80
+        }
+      ],
+      "selector": {
+        "app": "nginx"
+      }
+    }
+  ],
+  "namespaces": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "auth"
+    }
+  ]
+}
