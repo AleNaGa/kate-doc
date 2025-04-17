@@ -1,0 +1,16 @@
+DOC Day 3
+
+- Servicio Principal: 
+Se conecta al clúster de Kubernetes, obtiene todos los recursos (Pods, Nodes, Deployments, Services, Namespaces…), 
+los transforma en tus DTOs con los mappers, y devuelve un ClusterStateDTO listo para mandar al frontend.
+
+Utiliza Mappers que funcionan de esta forma: 
+
+					├── PodMapper.java
+                    ├── NodeMapper.java
+                    ├── DeploymentMapper.java
+             ClusterStateMapper.java
+			 
+			 
+			 
+El Front tiene que pasar un Token de acceso y la URL de Kubernetes para poder acceder COMO SE HACE ESO??
